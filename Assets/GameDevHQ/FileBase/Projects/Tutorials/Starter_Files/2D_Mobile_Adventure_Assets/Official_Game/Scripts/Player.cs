@@ -19,6 +19,7 @@ public class Player : MonoBehaviour
 
     private PlayerAnimation playerAnim;
     private SpriteRenderer _renderer;
+    private SpriteRenderer _swordArcSprite;
  
 
     // Start is called before the first frame update
@@ -27,6 +28,7 @@ public class Player : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         playerAnim = GetComponent<PlayerAnimation>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
+        _swordArcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -37,7 +39,9 @@ public class Player : MonoBehaviour
 
         //Return type method 
         MovementReturnTypeMethod();
-       //Grounded();
+        Attack();
+        
+      
     }
 
     void MovementReturnTypeMethod()
@@ -48,13 +52,11 @@ public class Player : MonoBehaviour
         //FLIP SPRITE=============
         if(horizontalMovement > 0)
         {
-            //facing right
-            _renderer.flipX = false;
+            Flip(true);
         }
         else if(horizontalMovement < 0)
         {
-            //facing left. 
-            _renderer.flipX = true;
+            Flip(false);
         }
         //JUMP LOGIC======================================
         if(Input.GetKeyDown(KeyCode.Space) && Grounded() == true)
@@ -88,6 +90,30 @@ public class Player : MonoBehaviour
         }
 
         return false;
+    }
+
+    void Flip(bool faceRight)
+    {
+        if(faceRight == true) // if facing right is true
+        {
+            _renderer.flipX = false; // not flipping x on the player sprite
+            _swordArcSprite.flipX = false; // not flipping X or Y on sword arc
+            _swordArcSprite.flipY = false;
+
+            Vector3 newPos = _swordArcSprite.transform.localPosition; // temporary variable 
+            newPos.x = 1.01f; // setting x of new Pos to 1.01
+            _swordArcSprite.transform.localPosition = newPos;//then saying new position is newPos + what we just did for X 
+        }
+        else if(faceRight == false)
+        {
+            _renderer.flipX = true;
+            _swordArcSprite.flipX = true;
+            _swordArcSprite.flipY = true;
+
+            Vector3 newPos = _swordArcSprite.transform.localPosition;
+            newPos.x = -1.01f;
+            _swordArcSprite.transform.localPosition = newPos;
+        }
     }
 
    /* void Movement()
@@ -128,6 +154,14 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
             resetJumpNeeded = false;
         
+    }
+
+    void Attack()
+    {
+        if(Input.GetMouseButtonDown(0) && Grounded() == true)
+        {
+            playerAnim.Attack();
+        }
     }
 
 
