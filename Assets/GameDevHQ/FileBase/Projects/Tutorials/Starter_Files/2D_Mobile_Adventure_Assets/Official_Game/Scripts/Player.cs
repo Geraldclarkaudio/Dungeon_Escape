@@ -17,12 +17,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _speed = 3.0f;
 
+    private PlayerAnimation playerAnim;
+    private SpriteRenderer _renderer;
  
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        playerAnim = GetComponent<PlayerAnimation>();
+        _renderer = GetComponentInChildren<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -33,21 +37,37 @@ public class Player : MonoBehaviour
 
         //Return type method 
         MovementReturnTypeMethod();
-        Grounded();
+       //Grounded();
     }
 
     void MovementReturnTypeMethod()
     {
-        float horizontalMovement = Input.GetAxisRaw("Horizontal");
-
-        rb.velocity = new Vector2(horizontalMovement * _speed, rb.velocity.y);
-
+        float horizontalMovement = Input.GetAxisRaw("Horizontal");//define horizontal input 
+        isGrounded = Grounded();
+        
+        //FLIP SPRITE=============
+        if(horizontalMovement > 0)
+        {
+            //facing right
+            _renderer.flipX = false;
+        }
+        else if(horizontalMovement < 0)
+        {
+            //facing left. 
+            _renderer.flipX = true;
+        }
+        //JUMP LOGIC======================================
         if(Input.GetKeyDown(KeyCode.Space) && Grounded() == true)
         {
             // jump
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
             StartCoroutine(WaitForGrounded());
+            playerAnim.Jump(true);
         }
+         //MOVE==============================================================
+        rb.velocity = new Vector2(horizontalMovement * _speed, rb.velocity.y);
+        //Change Animation state =================================
+        playerAnim.Move(horizontalMovement);//Call the Move method from player anaim and set the float value equal to our horizontal input. 
     }
 
     bool Grounded()
@@ -56,10 +76,13 @@ public class Player : MonoBehaviour
 
         Debug.DrawRay(transform.position, Vector2.down * 1.0f, Color.green);
 
+        Debug.Log("Youre grounded..");
+
         if(hitInfo.collider != null)
         {
             if(resetJumpNeeded == false)
             {
+                playerAnim.Jump(false);
                 return true;
             }
         }
@@ -101,7 +124,7 @@ public class Player : MonoBehaviour
     } */
     IEnumerator WaitForGrounded()
     {
-        
+            resetJumpNeeded = true;
             yield return new WaitForSeconds(0.1f);
             resetJumpNeeded = false;
         
