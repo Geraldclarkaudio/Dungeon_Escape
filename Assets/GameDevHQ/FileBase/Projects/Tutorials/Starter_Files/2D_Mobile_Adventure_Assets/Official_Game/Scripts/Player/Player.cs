@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamageable
 { 
+    public int Health { get; set; }
+
     private Rigidbody2D rb;
    
     [SerializeField]
@@ -34,14 +36,8 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Movement();
-        //CheckGrounded();
-
-        //Return type method 
         MovementReturnTypeMethod();
-        Attack();
-        
-      
+        Attack();             
     }
 
     void MovementReturnTypeMethod()
@@ -114,6 +110,11 @@ public class Player : MonoBehaviour
             newPos.x = -1.01f;
             _swordArcSprite.transform.localPosition = newPos;
         }
+    }
+
+    public void Damage()
+    {
+        Debug.Log("Damage() called on player");
     }
 
    /* void Movement()

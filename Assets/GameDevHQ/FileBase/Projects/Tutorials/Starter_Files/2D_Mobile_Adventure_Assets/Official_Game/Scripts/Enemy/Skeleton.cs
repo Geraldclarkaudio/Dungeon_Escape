@@ -16,13 +16,25 @@ public class Skeleton : Enemy, IDamageable
     {
         base.Movement();
         float distance = Vector3.Distance(transform.localPosition, player.transform.localPosition);
+        Vector3 direction = player.transform.localPosition - transform.localPosition;
 
-        Debug.Log("Distance: " + distance);
+        //Debug.Log("Distance: " + distance);
+
+        if(direction.x > 0 && anim.GetBool("inCombat") == true)
+        {
+            //face right
+            sprite.flipX = false;
+        }
+        else if(direction.x < 0 && anim.GetBool("inCombat") == true)
+        {
+            //face left 
+            sprite.flipX = true;
+        }
     }
 
     public void Damage()
     {
-        Debug.Log("Damage()");
+       
         Health--;
         anim.SetTrigger("Hit");
         isHit = true;
