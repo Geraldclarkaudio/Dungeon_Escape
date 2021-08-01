@@ -5,13 +5,22 @@ using UnityEngine;
 public abstract class Enemy : MonoBehaviour
 {
     //protected modifers can only be accessed by scripts that inherit from the enemy class. 
+    
+    //GENERA STATS===================
+    [SerializeField]
     protected int health;
+    [SerializeField]
     protected int speed;
+    [SerializeField]
     protected int gems;
+    //WAYPOINTS=======================
+    [SerializeField]
+    protected Transform pointA, pointB;
+
 
     public virtual void Attack()
     {
-        Debug.Log("My Name is: " + this.gameObject.name);
+        
     }
 
     //Forces each script that inherits from this class to have an update.
