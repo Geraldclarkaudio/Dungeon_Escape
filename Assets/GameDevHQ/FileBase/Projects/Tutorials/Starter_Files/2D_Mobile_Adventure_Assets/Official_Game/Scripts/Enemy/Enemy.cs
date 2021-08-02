@@ -22,7 +22,7 @@ public abstract class Enemy : MonoBehaviour
     protected SpriteRenderer sprite;
 
     protected Player player;
-
+    protected bool isDead = false;
     //Variable to store player position
 
     //DamageRelated Stuff
@@ -42,7 +42,7 @@ public abstract class Enemy : MonoBehaviour
 
     public virtual void Update()
     {
-        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") && anim.GetBool("inCombat") == false)
+        if (anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") && anim.GetBool("inCombat") == false || isDead == true)
         {
             return;
         }
