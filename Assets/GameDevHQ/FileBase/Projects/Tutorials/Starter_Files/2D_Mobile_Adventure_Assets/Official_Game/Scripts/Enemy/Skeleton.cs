@@ -19,7 +19,11 @@ public class Skeleton : Enemy, IDamageable
 
     public void Damage()
     {
-       
+        if (isDead == true)
+        {
+            return;
+        }
+
         Health--;
         anim.SetTrigger("Hit");
         isHit = true;
@@ -28,6 +32,11 @@ public class Skeleton : Enemy, IDamageable
         {
             anim.SetTrigger("Death");
             isDead = true;
+            //Spawn a diamond
+            GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            //change the value of diamond to whatever ymy gems count is. 
+            diamond.GetComponent<Diamond>().gems = base.gems; ;
         }
     }
 }

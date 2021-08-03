@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamageable
-{ 
+{
+    public int diamonds = 0; 
     public int Health { get; set; }
 
     private Rigidbody2D rb;
@@ -163,6 +164,11 @@ public class Player : MonoBehaviour, IDamageable
         {
             playerAnim.Attack();
         }
+    }
+
+    public void CollectDiamond()
+    {
+        diamonds++;
     }
 
 

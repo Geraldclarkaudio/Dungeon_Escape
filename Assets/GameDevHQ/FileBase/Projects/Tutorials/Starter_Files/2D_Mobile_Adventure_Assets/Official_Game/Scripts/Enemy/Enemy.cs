@@ -28,6 +28,8 @@ public abstract class Enemy : MonoBehaviour
     //DamageRelated Stuff
     protected bool isHit = false;
 
+    public GameObject diamondPrefab;
+
     public virtual void Init()
     {
         anim = GetComponentInChildren<Animator>();
