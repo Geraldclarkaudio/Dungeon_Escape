@@ -32,6 +32,7 @@ public class Player : MonoBehaviour, IDamageable
         playerAnim = GetComponent<PlayerAnimation>();
         _renderer = GetComponentInChildren<SpriteRenderer>();
         _swordArcSprite = transform.GetChild(1).GetComponent<SpriteRenderer>();
+        Health = 4;
     }
 
     // Update is called once per frame
@@ -113,41 +114,57 @@ public class Player : MonoBehaviour, IDamageable
 
     public void Damage()
     {
+        if(Health < 1)
+        {
+            return;
+        }
         Debug.Log("Damage() called on player");
+        //remove 1 health 
+        Health--;
+        UIManager.Instance.UpdateLives(Health);
+
+        if(Health < 1)
+        {
+            playerAnim.Death();
+        }
+        //Update UI display. 
+        //check if dead
+        //play death anim 
+        //Update UI display. 
     }
 
-   /* void Movement()
-    {
-        float move = Input.GetAxisRaw("Horizontal");
+    /* void Movement()
+     {
+         float move = Input.GetAxisRaw("Horizontal");
 
-        //if space key && grounded. 
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
-        {
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            isGrounded = false;
-            // breathe
-            resetJumpNeeded = true;
-            StartCoroutine(WaitForGrounded());
-        }
-        rb.velocity = new Vector2(move, rb.velocity.y);
-    }
+         //if space key && grounded. 
+         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+         {
+             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+             isGrounded = false;
+             // breathe
+             resetJumpNeeded = true;
+             StartCoroutine(WaitForGrounded());
+         }
+         rb.velocity = new Vector2(move, rb.velocity.y);
+     }
 
-   void CheckGrounded()
-    {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, 1 << 8); //using bit shift because it was originally detecting the player. 
-        //COuld also set a LayerMask variable called _groundLayer and instead of using bit shift use _groundLayer.value. 
-        Debug.DrawRay(transform.position, Vector2.down, Color.green);
+    void CheckGrounded()
+     {
+         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, 1 << 8); //using bit shift because it was originally detecting the player. 
+         //COuld also set a LayerMask variable called _groundLayer and instead of using bit shift use _groundLayer.value. 
+         Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
-        if (hit.collider != null)
-        {
-            Debug.Log("Hit" + hit.collider.name);
-            if (resetJumpNeeded == false)
-            {
-                isGrounded = true;
+         if (hit.collider != null)
+         {
+             Debug.Log("Hit" + hit.collider.name);
+             if (resetJumpNeeded == false)
+             {
+                 isGrounded = true;
 
-            }
-        }
-    } */
+             }
+         }
+     } */
     IEnumerator WaitForGrounded()
     {
             resetJumpNeeded = true;
@@ -167,6 +184,12 @@ public class Player : MonoBehaviour, IDamageable
     public void CollectDiamond()
     {
         diamonds++;
+    }
+
+    public void AddGems(int amount)
+    {
+        diamonds += amount;
+        UIManager.Instance.UpdateGemCount(diamonds);
     }
 
 
