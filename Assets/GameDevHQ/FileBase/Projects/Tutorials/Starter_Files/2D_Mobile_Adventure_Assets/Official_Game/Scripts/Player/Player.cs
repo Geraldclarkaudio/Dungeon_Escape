@@ -75,8 +75,6 @@ public class Player : MonoBehaviour, IDamageable
 
         Debug.DrawRay(transform.position, Vector2.down * 1.0f, Color.green);
 
-        Debug.Log("Youre grounded..");
-
         if(hitInfo.collider != null)
         {
             if(resetJumpNeeded == false)
