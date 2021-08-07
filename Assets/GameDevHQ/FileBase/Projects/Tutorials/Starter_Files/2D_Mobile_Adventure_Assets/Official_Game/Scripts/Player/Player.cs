@@ -58,7 +58,7 @@ public class Player : MonoBehaviour, IDamageable
             Flip(false);
         }
         //JUMP LOGIC======================================
-        if((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("B_Button")) && Grounded() == true)
+        if((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("A_Button")) && Grounded() == true)
         {
             // jump
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
@@ -176,7 +176,7 @@ public class Player : MonoBehaviour, IDamageable
 
     void Attack()
     {
-        if((Input.GetMouseButtonDown(0) || CrossPlatformInputManager.GetButtonDown("A_Button")) && Grounded() == true)
+        if(CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
         {
             playerAnim.Attack();
         }
