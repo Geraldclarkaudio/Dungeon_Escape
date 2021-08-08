@@ -51,6 +51,8 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
         switch (result)
         {
             case ShowResult.Finished:
+                GameManager.Instance._player.AddGems(100);
+                UIManager.Instance.OpenShop(GameManager.Instance._player.diamonds);
                 //give currency
                 break;
             case ShowResult.Skipped:

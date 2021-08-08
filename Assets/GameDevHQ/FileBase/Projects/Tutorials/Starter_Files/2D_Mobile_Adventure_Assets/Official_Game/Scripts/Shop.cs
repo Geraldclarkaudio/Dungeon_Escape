@@ -6,6 +6,9 @@ public class Shop : MonoBehaviour
 {
     public GameObject shopPanel;
 
+    public GameObject aButton;
+    public GameObject bButton;
+
     //variable for current item selected. 
     public int currentSelection;
 
@@ -18,6 +21,8 @@ public class Shop : MonoBehaviour
         if (other.tag == "Player")
         {
             player = other.GetComponent<Player>();
+            aButton.SetActive(false);
+            bButton.SetActive(false);
             if(player != null)
             {
                 UIManager.Instance.OpenShop(player.diamonds);
@@ -31,6 +36,8 @@ public class Shop : MonoBehaviour
         if (other.tag == "Player")
         {
             shopPanel.SetActive(false);
+            aButton.SetActive(true);
+            bButton.SetActive(true);
         }
     }
 
@@ -81,8 +88,6 @@ public class Shop : MonoBehaviour
             Debug.Log("You broke");
             shopPanel.SetActive(false);
         }
-       //if player gems is Greater than or equal to item cost = award item else cancel sale. 
-       //subtrct cost from player's gems. 
 
     }
 }

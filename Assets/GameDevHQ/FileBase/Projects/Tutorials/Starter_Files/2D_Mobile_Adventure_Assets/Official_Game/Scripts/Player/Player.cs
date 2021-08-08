@@ -24,6 +24,8 @@ public class Player : MonoBehaviour, IDamageable
     private PlayerAnimation playerAnim;
     private SpriteRenderer _renderer;
     private SpriteRenderer _swordArcSprite;
+
+    public GameObject gameOverText;
  
 
     // Start is called before the first frame update
@@ -39,8 +41,17 @@ public class Player : MonoBehaviour, IDamageable
     // Update is called once per frame
     void Update()
     {
-        MovementReturnTypeMethod();
-        Attack();             
+        if(Health > 1)
+        {
+            MovementReturnTypeMethod();
+            Attack();
+        }
+
+        if (Health < 1)
+        {
+
+            GameOver();
+        }
     }
 
     void MovementReturnTypeMethod()
@@ -128,55 +139,10 @@ public class Player : MonoBehaviour, IDamageable
         {
             playerAnim.Death();
         }
-        //Update UI display. 
-        //check if dead
-        //play death anim 
-        //Update UI display. 
     }
-
-    /* void Movement()
-     {
-         float move = Input.GetAxisRaw("Horizontal");
-
-         //if space key && grounded. 
-         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
-         {
-             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-             isGrounded = false;
-             // breathe
-             resetJumpNeeded = true;
-             StartCoroutine(WaitForGrounded());
-         }
-         rb.velocity = new Vector2(move, rb.velocity.y);
-     }
-
-    void CheckGrounded()
-     {
-         RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f, 1 << 8); //using bit shift because it was originally detecting the player. 
-         //COuld also set a LayerMask variable called _groundLayer and instead of using bit shift use _groundLayer.value. 
-         Debug.DrawRay(transform.position, Vector2.down, Color.green);
-
-         if (hit.collider != null)
-         {
-             Debug.Log("Hit" + hit.collider.name);
-             if (resetJumpNeeded == false)
-             {
-                 isGrounded = true;
-
-             }
-         }
-     } */
-    IEnumerator WaitForGrounded()
-    {
-            resetJumpNeeded = true;
-            yield return new WaitForSeconds(0.1f);
-            resetJumpNeeded = false;
-        
-    }
-
     void Attack()
     {
-        if(CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
+        if (CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
         {
             playerAnim.Attack();
         }
@@ -192,6 +158,40 @@ public class Player : MonoBehaviour, IDamageable
         diamonds += amount;
         UIManager.Instance.UpdateGemCount(diamonds);
     }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if(other.tag =="Spikes")
+        {
+            Debug.Log("Collision with Spikes Detected");
+
+            Health -= 5;
+            playerAnim.Death();
+        }
+    }
+
+    public void GameOver()
+    { 
+        StartCoroutine(GameOverFlicker());
+    }
+
+
+    IEnumerator WaitForGrounded()
+    {
+            resetJumpNeeded = true;
+            yield return new WaitForSeconds(0.1f);
+            resetJumpNeeded = false;  
+    }
+
+    IEnumerator GameOverFlicker()
+    {
+        yield return new WaitForSeconds(0.5f);
+        gameOverText.SetActive(true);
+        yield return new WaitForSeconds(2.0f);
+        GameManager.Instance.gameOver = true;
+    }
+
+
 
 
 }
