@@ -26,6 +26,7 @@ public class Player : MonoBehaviour, IDamageable
     private SpriteRenderer _swordArcSprite;
 
     public GameObject gameOverText;
+    public GameObject gameOverFade;
  
 
     // Start is called before the first frame update
@@ -173,6 +174,7 @@ public class Player : MonoBehaviour, IDamageable
     public void GameOver()
     { 
         StartCoroutine(GameOverFlicker());
+        gameOverFade.SetActive(true);
     }
 
 
@@ -187,7 +189,7 @@ public class Player : MonoBehaviour, IDamageable
     {
         yield return new WaitForSeconds(0.5f);
         gameOverText.SetActive(true);
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(5.0f);
         GameManager.Instance.gameOver = true;
     }
 
