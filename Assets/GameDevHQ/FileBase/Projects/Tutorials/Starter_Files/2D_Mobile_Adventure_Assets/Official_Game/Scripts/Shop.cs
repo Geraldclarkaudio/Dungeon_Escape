@@ -77,11 +77,21 @@ public class Shop : MonoBehaviour
             {
                 GameManager.Instance.hasKey = true;
             }
+            if(currentSelection == 1)
+            {
+                GameManager.Instance.hasBootsOfFlight = true;
+            }
+            if(currentSelection == 0)
+            {
+                GameManager.Instance.hasFlameSword = true;
+            }
 
             player.diamonds -= currentCost;
             Debug.Log("Purchased: " + currentSelection);
             Debug.Log("Remaining Gems: " + player.diamonds);
             shopPanel.SetActive(false);
+
+            
         }
         else
         {

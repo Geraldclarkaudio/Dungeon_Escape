@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     public Image[] healthBars;
 
+    public GameObject youWinUI;
+
     private void Awake()
     {
         _instance = this;
@@ -64,6 +66,14 @@ public class UIManager : MonoBehaviour
         }
     
         //if i is equal to the lives remaining, hide that one 
+    }
+
+    public void YouWinScreen()
+    {
+        if(GameManager.Instance.youWin == true)
+        {
+            youWinUI.SetActive(true);
+        }
     }
 
 }

@@ -19,6 +19,10 @@ public class GameManager : MonoBehaviour
     }
 
     public bool hasKey { get; set;}
+    public bool hasBootsOfFlight { get; set; }
+    public bool hasFlameSword { get; set; }
+
+    public bool youWin { get; set; }
 
     public bool gameOver { get; set; }
 

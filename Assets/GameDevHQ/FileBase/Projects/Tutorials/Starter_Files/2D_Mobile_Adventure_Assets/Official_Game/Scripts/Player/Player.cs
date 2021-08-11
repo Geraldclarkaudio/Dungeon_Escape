@@ -70,12 +70,21 @@ public class Player : MonoBehaviour, IDamageable
             Flip(false);
         }
         //JUMP LOGIC======================================
-        if((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("A_Button")) && Grounded() == true)
+        if ((Input.GetKeyDown(KeyCode.Space) || CrossPlatformInputManager.GetButtonDown("A_Button")) && Grounded() == true)
         {
-            // jump
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            StartCoroutine(WaitForGrounded());
-            playerAnim.Jump(true);
+            if (GameManager.Instance.hasBootsOfFlight == true) //Boots Of Flight Jump
+            {
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce + 3f);
+                StartCoroutine(WaitForGrounded());
+                playerAnim.Jump(true);
+            }
+            else // REGULAR JUMP
+            {
+                // jump
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                StartCoroutine(WaitForGrounded());
+                playerAnim.Jump(true);
+            }
         }
          //MOVE==============================================================
         rb.velocity = new Vector2(horizontalMovement * _speed, rb.velocity.y);
@@ -131,8 +140,7 @@ public class Player : MonoBehaviour, IDamageable
         {
             return;
         }
-        Debug.Log("Damage() called on player");
-        //remove 1 health 
+
         Health--;
         UIManager.Instance.UpdateLives(Health);
 
