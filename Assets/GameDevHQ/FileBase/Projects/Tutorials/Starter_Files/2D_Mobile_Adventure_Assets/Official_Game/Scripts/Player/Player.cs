@@ -151,7 +151,7 @@ public class Player : MonoBehaviour, IDamageable
     }
     void Attack()
     {
-        if (CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
+        if (Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
         {
             playerAnim.Attack();
         }

@@ -17,9 +17,6 @@ public class Diamond : MonoBehaviour
             if(_player != null)
             {
                 _player.AddGems(gems);
-               // _player.diamonds += gems;//takes diamonds and increments depending on number of gems collected.
-
-
                 Destroy(this.gameObject);
             }
            

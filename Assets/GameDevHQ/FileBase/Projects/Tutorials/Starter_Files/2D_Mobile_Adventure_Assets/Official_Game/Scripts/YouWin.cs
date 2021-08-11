@@ -8,10 +8,15 @@ public class YouWin : MonoBehaviour
     {
         if(other.tag == "Player")
         {
-            GameManager.Instance.youWin = true;
-            UIManager.Instance.YouWinScreen();
-
-            //UIManager stuff
+            if(GameManager.Instance.hasKey == true)
+            {
+                GameManager.Instance.youWin = true;
+                UIManager.Instance.YouWinScreen();
+            }
+            else
+            {
+                Debug.Log("You Need the KEY");
+            }
         }
     }
 }

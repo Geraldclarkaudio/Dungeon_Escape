@@ -86,40 +86,4 @@ public class AdsManager : MonoBehaviour, IUnityAdsListener
     {
         Advertisement.RemoveListener(this);
     }
-
-
-  /*  public void ShowRewardedAd()
-    {
-        Debug.Log("Showing rewarded ad");
-
-        //if ad is ready 
-        if(Advertisement.IsReady("Rewarded_Android"))
-        {
-            var options = new ShowOptions
-            {
-                resultCallback = HandleShowResult
-            };
-
-            Advertisement.Show("Rewarded_Android", options);
-           
-        }
-    }
-
-    void HandleShowResult(ShowResult result)
-    {
-        switch(result)
-        {
-            case ShowResult.Finished:
-                //award player with coins
-                break;
-            case ShowResult.Skipped:
-                Debug.Log("You skipped");
-                //Why you skipping? 
-                break;
-            case ShowResult.Failed:
-                Debug.Log("Failed");
-                break;
-        }
-    }*/
-
 }

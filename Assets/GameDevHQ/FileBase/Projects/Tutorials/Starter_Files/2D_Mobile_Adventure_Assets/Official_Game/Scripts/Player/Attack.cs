@@ -20,6 +20,10 @@ public class Attack : MonoBehaviour
                 canHit = false;
                 StartCoroutine(ResetCanHit());
             }
+            else
+            {
+                return;
+            }
         }
     }
 

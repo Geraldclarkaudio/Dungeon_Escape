@@ -17,18 +17,27 @@ public class YMG_Boss : Enemy, IDamageable
         base.Movement();
     }
 
+
     public void Damage()
     {
         if (isDead == true)
         {
             return;
         }
-        
 
-        Health--;
-        anim.SetTrigger("Hit");
-        isHit = true;
-        anim.SetBool("inCombat", true);
+        if(GameManager.Instance.hasFlameSword == true)
+        {
+            Health--;
+            anim.SetTrigger("Hit");
+            isHit = true;
+            anim.SetBool("inCombat", true);
+        }
+        else
+        {
+            Debug.Log("Need a better weapon!");
+            //UIManager saying you need to get flamesword
+
+        }
 
         if (Health < 1)
         {
