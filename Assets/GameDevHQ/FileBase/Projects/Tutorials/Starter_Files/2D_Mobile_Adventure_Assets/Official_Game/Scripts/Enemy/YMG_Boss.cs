@@ -6,6 +6,8 @@ public class YMG_Boss : Enemy, IDamageable
 {
     public int Health { get; set; }
 
+    public GameObject canvas;
+
     public override void Init()
     {
         base.Init();
@@ -35,8 +37,7 @@ public class YMG_Boss : Enemy, IDamageable
         else
         {
             Debug.Log("Need a better weapon!");
-            //UIManager saying you need to get flamesword
-
+            StartCoroutine(TextActive());
         }
 
         if (Health < 1)
@@ -49,6 +50,13 @@ public class YMG_Boss : Enemy, IDamageable
             //change the value of diamond to whatever ymy gems count is. 
             diamond.GetComponent<Diamond>().gems = base.gems;
 
+        }
+
+        IEnumerator TextActive()
+        {
+            canvas.SetActive(true);
+            yield return new WaitForSeconds(3.0f);
+            canvas.SetActive(false);
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class YouWin : MonoBehaviour
 {
+    public GameObject needKeyText;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
@@ -15,8 +16,17 @@ public class YouWin : MonoBehaviour
             }
             else
             {
+                needKeyText.SetActive(true);
                 Debug.Log("You Need the KEY");
             }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+     if(other.tag == "Player")
+        {
+            needKeyText.SetActive(false);
         }
     }
 }

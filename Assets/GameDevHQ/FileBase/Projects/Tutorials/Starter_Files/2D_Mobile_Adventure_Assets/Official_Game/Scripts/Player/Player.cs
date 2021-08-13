@@ -27,6 +27,8 @@ public class Player : MonoBehaviour, IDamageable
 
     public GameObject gameOverText;
     public GameObject gameOverFade;
+
+    public GameObject cantMakeItBox;
  
 
     // Start is called before the first frame update
@@ -176,6 +178,19 @@ public class Player : MonoBehaviour, IDamageable
 
             Health -= 5;
             playerAnim.Death();
+        }
+
+        if(other.tag == "CantMakeThat" && GameManager.Instance.hasBootsOfFlight == false)
+        {
+            //set active 
+            cantMakeItBox.SetActive(true);
+        }
+    }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.tag == "CantMakeThat")
+        {
+            cantMakeItBox.SetActive(false);
         }
     }
 

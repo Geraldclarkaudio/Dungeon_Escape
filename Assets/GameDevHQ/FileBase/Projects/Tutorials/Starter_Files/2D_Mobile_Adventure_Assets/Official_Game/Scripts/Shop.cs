@@ -16,6 +16,8 @@ public class Shop : MonoBehaviour
 
     private Player player;
 
+    public GameObject cantAfford;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -87,6 +89,8 @@ public class Shop : MonoBehaviour
             }
 
             player.diamonds -= currentCost;
+            UIManager.Instance.UpdateGemCount(player.diamonds);
+            
             Debug.Log("Purchased: " + currentSelection);
             Debug.Log("Remaining Gems: " + player.diamonds);
             shopPanel.SetActive(false);
@@ -96,7 +100,16 @@ public class Shop : MonoBehaviour
         else
         {
             Debug.Log("You broke");
+            StartCoroutine(cantAffordIt());
             shopPanel.SetActive(false);
+        }
+
+        IEnumerator cantAffordIt()
+        {
+            cantAfford.SetActive(true);
+            yield return new WaitForSeconds(1.5f);
+            cantAfford.SetActive(false);
+
         }
 
     }
