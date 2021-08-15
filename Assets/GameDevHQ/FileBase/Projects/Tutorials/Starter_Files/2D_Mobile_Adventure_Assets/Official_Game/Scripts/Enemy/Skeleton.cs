@@ -26,11 +26,15 @@ public class Skeleton : Enemy, IDamageable
 
         Health--;
         anim.SetTrigger("Hit");
+        audioSource.clip = attackSound[Random.Range(0,1)];
+        audioSource.Play();
         isHit = true;
         anim.SetBool("inCombat", true);
         if(Health < 1)
         {
             anim.SetTrigger("Death");
+            audioSource.clip = deathSound;
+            audioSource.Play();
             isDead = true;
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;

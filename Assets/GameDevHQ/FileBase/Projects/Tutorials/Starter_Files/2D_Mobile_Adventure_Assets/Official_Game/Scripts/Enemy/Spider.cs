@@ -8,6 +8,7 @@ public class Spider : Enemy, IDamageable
     private GameObject acidPrefab;
     public int Health { get; set; }
 
+
     public override void Init()
     {
         base.Init();
@@ -24,6 +25,9 @@ public class Spider : Enemy, IDamageable
         if(Health < 1)
         {
             anim.SetTrigger("Death");
+            audioSource.clip = deathSound;
+            audioSource.Play();
+
             isDead = true;
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
@@ -46,6 +50,13 @@ public class Spider : Enemy, IDamageable
     {
         //instantiate acid 
         Instantiate(acidPrefab, transform.position, Quaternion.identity);
+        float distance = Vector3.Distance(transform.position, player.transform.position);
+        Debug.Log("you are " + distance + "units away");
+        AudioSource.PlayClipAtPoint(attackSound[0], transform.position);
+        
+       
+
+
     }
 
 }

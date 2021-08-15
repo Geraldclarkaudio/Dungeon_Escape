@@ -25,6 +25,9 @@ public class MossGiant : Enemy, IDamageable
         }
 
         Health--;
+        audioSource.clip = attackSound[Random.Range(0,1)];
+        audioSource.pitch = Random.Range(0.7f, 1.2f);
+        audioSource.Play();
         anim.SetTrigger("Hit");
         isHit = true;
         anim.SetBool("inCombat", true);
@@ -33,6 +36,9 @@ public class MossGiant : Enemy, IDamageable
         {
             anim.SetTrigger("Death");
             isDead = true;
+            audioSource.pitch = 1f;
+            audioSource.clip = deathSound;
+            audioSource.Play();
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
 

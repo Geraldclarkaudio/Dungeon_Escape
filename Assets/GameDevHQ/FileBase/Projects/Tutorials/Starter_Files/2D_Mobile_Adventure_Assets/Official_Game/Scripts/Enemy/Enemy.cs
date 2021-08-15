@@ -30,16 +30,25 @@ public abstract class Enemy : MonoBehaviour
 
     public GameObject diamondPrefab;
 
+    protected AudioSource audioSource;
+
+    [SerializeField]
+    protected AudioClip deathSound;
+    [SerializeField]
+    protected AudioClip[] attackSound;
+
     public virtual void Init()
     {
         anim = GetComponentInChildren<Animator>();
         sprite = GetComponentInChildren<SpriteRenderer>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     private void Start()
     {
         Init();
+      
     }
 
     public virtual void Update()

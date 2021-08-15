@@ -30,6 +30,10 @@ public class YMG_Boss : Enemy, IDamageable
         if(GameManager.Instance.hasFlameSword == true)
         {
             Health--;
+            
+            audioSource.clip = attackSound[Random.Range(0,1)];
+            audioSource.Play();
+
             anim.SetTrigger("Hit");
             isHit = true;
             anim.SetBool("inCombat", true);
@@ -43,6 +47,8 @@ public class YMG_Boss : Enemy, IDamageable
         if (Health < 1)
         {
             anim.SetTrigger("Death");
+            audioSource.clip = deathSound;
+            audioSource.Play();
             isDead = true;
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
