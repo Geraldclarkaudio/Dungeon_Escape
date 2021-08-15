@@ -18,6 +18,12 @@ public class Shop : MonoBehaviour
 
     public GameObject cantAfford;
 
+    public AudioClip buyItemSound;
+    public AudioClip openShopSound;
+
+    [SerializeField]
+    private AudioSource _audioSource;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.tag == "Player")
@@ -30,6 +36,10 @@ public class Shop : MonoBehaviour
                 UIManager.Instance.OpenShop(player.diamonds);
             }
             shopPanel.SetActive(true);
+            _audioSource.clip = openShopSound;
+            _audioSource.Play();
+
+
         }
     }
 
@@ -94,6 +104,8 @@ public class Shop : MonoBehaviour
             Debug.Log("Purchased: " + currentSelection);
             Debug.Log("Remaining Gems: " + player.diamonds);
             shopPanel.SetActive(false);
+            _audioSource.clip = buyItemSound;
+            _audioSource.Play();
 
             
         }

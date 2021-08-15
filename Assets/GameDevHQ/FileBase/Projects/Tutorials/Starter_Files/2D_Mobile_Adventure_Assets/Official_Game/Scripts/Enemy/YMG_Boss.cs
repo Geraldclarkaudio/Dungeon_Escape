@@ -8,10 +8,14 @@ public class YMG_Boss : Enemy, IDamageable
 
     public GameObject canvas;
 
+    private AudioSource _audioSource;
+
     public override void Init()
     {
         base.Init();
         Health = base.health;
+
+        _audioSource = GetComponentInChildren<AudioSource>();
     }
 
     public override void Movement()
@@ -31,6 +35,7 @@ public class YMG_Boss : Enemy, IDamageable
         {
             Health--;
             
+            
             audioSource.clip = attackSound[Random.Range(0,1)];
             audioSource.Play();
 
@@ -49,6 +54,7 @@ public class YMG_Boss : Enemy, IDamageable
             anim.SetTrigger("Death");
             audioSource.clip = deathSound;
             audioSource.Play();
+            _audioSource.mute = true;
             isDead = true;
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
