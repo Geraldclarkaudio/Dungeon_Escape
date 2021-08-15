@@ -28,8 +28,7 @@ public class Player : MonoBehaviour, IDamageable
     public GameObject gameOverText;
     public GameObject gameOverFade;
 
-    public GameObject cantMakeItBox;
- 
+    public GameObject cantMakeItBox;   
 
     // Start is called before the first frame update
     void Start()
@@ -215,8 +214,4 @@ public class Player : MonoBehaviour, IDamageable
         yield return new WaitForSeconds(5.0f);
         GameManager.Instance.gameOver = true;
     }
-
-
-
-
 }
