@@ -93,7 +93,7 @@ public class Player : MonoBehaviour, IDamageable
         playerAnim.Move(horizontalMovement);//Call the Move method from player anaim and set the float value equal to our horizontal input. 
     }
 
-    bool Grounded()
+    public bool Grounded()
     {
         RaycastHit2D hitInfo = Physics2D.Raycast(transform.position, Vector2.down, 1.0f, 1 << 8);
 
@@ -172,16 +172,13 @@ public class Player : MonoBehaviour, IDamageable
     public void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag =="Spikes")
-        {
-            Debug.Log("Collision with Spikes Detected");
-
+        { 
             Health -= 5;
             playerAnim.Death();
         }
 
         if(other.tag == "CantMakeThat" && GameManager.Instance.hasBootsOfFlight == false)
         {
-            //set active 
             cantMakeItBox.SetActive(true);
         }
     }
