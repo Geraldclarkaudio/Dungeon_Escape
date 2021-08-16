@@ -37,6 +37,7 @@ public class YMG_Boss : Enemy, IDamageable
             
             
             audioSource.clip = attackSound[Random.Range(0,1)];
+            audioSource.pitch = Random.Range(0.8f, 1.2f);
             audioSource.Play();
 
             anim.SetTrigger("Hit");
@@ -54,7 +55,6 @@ public class YMG_Boss : Enemy, IDamageable
             anim.SetTrigger("Death");
             audioSource.clip = deathSound;
             audioSource.Play();
-            _audioSource.mute = true;
             isDead = true;
             //Spawn a diamond
             GameObject diamond = Instantiate(diamondPrefab, transform.position, Quaternion.identity) as GameObject;
