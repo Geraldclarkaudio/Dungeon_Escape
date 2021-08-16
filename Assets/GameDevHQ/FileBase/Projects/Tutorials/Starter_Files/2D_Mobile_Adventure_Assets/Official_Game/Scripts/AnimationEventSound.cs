@@ -1,23 +1,32 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AnimationEventSound : MonoBehaviour
 {
-    private AudioSource _audioSource;
     public AudioClip[] footsteps;
     public AudioClip[] swordSwing;
+
+    private AudioSource fsAudioSource;
+    [SerializeField]
+    private AudioMixerGroup fsAudioMixerGroup;
+
+    private AudioSource attackAudioSource;
+    [SerializeField]
+    private AudioMixerGroup attackAudioGroup;
 
     private Player player;
 
     private void Start()
     {
-        _audioSource = GetComponent<AudioSource>();
-        if(_audioSource == null)
-        {
-            Debug.LogError("AudioSource is Null");
+        
+        fsAudioSource = gameObject.AddComponent<AudioSource>();
+        fsAudioSource.outputAudioMixerGroup = fsAudioMixerGroup;
 
-        }
+        attackAudioSource = gameObject.AddComponent<AudioSource>();
+        attackAudioSource.outputAudioMixerGroup = attackAudioGroup;
+
         player = GetComponentInParent<Player>();
 
         if (player == null)
@@ -31,16 +40,17 @@ public class AnimationEventSound : MonoBehaviour
     {
         if(player.Grounded() == true)
         {
-            _audioSource.clip = footsteps[Random.Range(0, 4)];
-            _audioSource.pitch = Random.Range(0.9f, 1.2f);
-            _audioSource.Play();
+            
+            fsAudioSource.clip = footsteps[Random.Range(0, 4)];
+            fsAudioSource.pitch = Random.Range(0.9f, 1.2f);
+            fsAudioSource.Play();
         }
     }
 
     public void AttackSound()
     {
-        _audioSource.clip = swordSwing[Random.Range(0, 4)];
-        _audioSource.pitch = Random.Range(0.9f, 1.2f);
-        _audioSource.Play();
+        attackAudioSource.clip = swordSwing[Random.Range(0, 4)];
+        attackAudioSource.pitch = Random.Range(0.9f, 1.2f);
+        attackAudioSource.Play();
     }
 }
