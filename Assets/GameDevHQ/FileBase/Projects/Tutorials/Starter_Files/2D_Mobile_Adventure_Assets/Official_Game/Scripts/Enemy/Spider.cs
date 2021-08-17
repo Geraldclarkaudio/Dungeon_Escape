@@ -6,6 +6,8 @@ public class Spider : Enemy, IDamageable
 {
     [SerializeField]
     private GameObject acidPrefab;
+
+
     public int Health { get; set; }
 
 
@@ -51,8 +53,10 @@ public class Spider : Enemy, IDamageable
         //instantiate acid 
         Instantiate(acidPrefab, transform.position, Quaternion.identity);
         float distance = Vector3.Distance(transform.position, player.transform.position);
-        Debug.Log("you are " + distance + "units away");
-        AudioSource.PlayClipAtPoint(attackSound[0], transform.position);
+        audioSource.clip = attackSound[0];
+        audioSource.Play();
+
+
         
        
 
