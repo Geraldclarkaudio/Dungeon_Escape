@@ -154,7 +154,14 @@ public class Player : MonoBehaviour, IDamageable
     {
         if (Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
         {
-            playerAnim.Attack();
+            if(GameManager.Instance.hasFlameSword == true)
+            {
+                playerAnim.FlameSwordAttack();
+            }
+            else
+            {
+                playerAnim.Attack();
+            }
         }
     }
 

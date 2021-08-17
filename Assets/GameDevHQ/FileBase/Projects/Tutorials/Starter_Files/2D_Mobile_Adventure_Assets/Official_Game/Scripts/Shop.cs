@@ -107,6 +107,8 @@ public class Shop : MonoBehaviour
             _audioSource.clip = buyItemSound;
             _audioSource.Play();
 
+
+
             
         }
         else

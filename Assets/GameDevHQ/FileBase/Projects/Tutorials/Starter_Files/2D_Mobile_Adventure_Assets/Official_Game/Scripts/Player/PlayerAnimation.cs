@@ -36,4 +36,21 @@ public class PlayerAnimation : MonoBehaviour
     {
         _anim.SetTrigger("Death");
     }
+
+    public void FlameSwordAttack()
+    {
+        _anim.SetTrigger("FlameSword");
+    }
+
+    public void Update()
+    {
+        if(GameManager.Instance.hasFlameSword == true)
+        {
+            _anim.SetBool("hasFSword", true);
+        }
+        else
+        {
+            _anim.SetBool("hasFSword", false);
+        }
+    }
 }
