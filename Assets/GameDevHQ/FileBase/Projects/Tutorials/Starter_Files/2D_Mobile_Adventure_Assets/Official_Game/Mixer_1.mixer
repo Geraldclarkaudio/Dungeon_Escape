@@ -134,6 +134,20 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!244 &-128584504570174171
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 60352f18f970048408d06eab40645286
+  m_EffectName: Attenuation
+  m_MixLevel: ec1c48e94f80d5149adc3f4523a7eeef
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!241 &24100000
 AudioMixerController:
   m_ObjectHideFlags: 0
@@ -160,6 +174,7 @@ AudioMixerController:
     - c2dae6f7b64ea80498bccffe3da47e52
     - df457b63797beed4c9532e9ec5c23de1
     - 56d5c5855dea1714fbb13fd08f58ffab
+    - fdad00fb9db92a741b500c7cf79876b1
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -229,6 +244,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &3077353619930334259
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FlameSword
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: fdad00fb9db92a741b500c7cf79876b1
+  m_Children: []
+  m_Volume: 8363a116c1e9dd9409f48d2a924773db
+  m_Pitch: 0f5d580c6cf79cf45bc0f21afd39928f
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -128584504570174171}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &4685250658561229031
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -255,6 +289,7 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: -5875580431233347067}
   - {fileID: -791421563764234545}
+  - {fileID: 3077353619930334259}
   m_Volume: 3efe2bc53974172489b9fa8aeb412044
   m_Pitch: be9f333f298e2b94fb4367ff1ed1d7cb
   m_Send: 00000000000000000000000000000000

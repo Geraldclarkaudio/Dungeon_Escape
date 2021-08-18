@@ -152,17 +152,47 @@ public class Player : MonoBehaviour, IDamageable
     }
     void Attack()
     {
-        if (Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == true)
+        if ((Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button")) && Grounded() == true)
         {
             if(GameManager.Instance.hasFlameSword == true)
             {
+                //regular flame attack
                 playerAnim.FlameSwordAttack();
             }
             else
             {
+                //regular attCK
+                Debug.Log("Regular attack happens for some reason.");
                 playerAnim.Attack();
             }
         }
+        if((Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button")) && Grounded() == false)
+        {
+            if (GameManager.Instance.hasFlameSword == true)
+            {
+                //flame jump swing
+                playerAnim.JumpSwingFire();
+            }
+            else
+            {
+                //regular jump swing
+                playerAnim.JumpSwing();
+            }
+        }
+
+      /*  if(Input.GetKeyDown((KeyCode.F)) || CrossPlatformInputManager.GetButtonDown("B_Button") && Grounded() == false)
+        {
+            if (GameManager.Instance.hasFlameSword == true)
+            {
+                //flame jump swing
+                playerAnim.JumpSwingFire();
+            }
+            else
+            {
+                //regular jump swing
+                playerAnim.JumpSwing();
+            }
+        }*/
     }
 
     public void CollectDiamond()
@@ -207,7 +237,7 @@ public class Player : MonoBehaviour, IDamageable
     IEnumerator WaitForGrounded()
     {
             resetJumpNeeded = true;
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.5f);
             resetJumpNeeded = false;  
     }
 

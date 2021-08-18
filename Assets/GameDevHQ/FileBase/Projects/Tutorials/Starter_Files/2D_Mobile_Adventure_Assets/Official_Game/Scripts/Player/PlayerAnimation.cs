@@ -41,6 +41,14 @@ public class PlayerAnimation : MonoBehaviour
     {
         _anim.SetTrigger("FlameSword");
     }
+    public void JumpSwing()
+    {
+        _anim.SetTrigger("JumpSwingReg");
+    }
+    public void JumpSwingFire()
+    {
+        _anim.SetTrigger("JumpSwingFire");
+    }
 
     public void Update()
     {
@@ -53,4 +61,5 @@ public class PlayerAnimation : MonoBehaviour
             _anim.SetBool("hasFSword", false);
         }
     }
+
 }
