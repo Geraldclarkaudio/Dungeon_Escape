@@ -8,6 +8,7 @@ public class AnimationEventSound : MonoBehaviour
     public AudioClip[] footsteps;
     public AudioClip[] swordSwing;
     public AudioClip[] flameSwordSwing;
+    public AudioClip death;
 
     private AudioSource fsAudioSource;
     [SerializeField]
@@ -20,6 +21,10 @@ public class AnimationEventSound : MonoBehaviour
     private AudioSource flameSwordAudioSource;
     [SerializeField]
     private AudioMixerGroup flameSwordAudioGroup;
+
+    private AudioSource deathAudioSource;
+    [SerializeField]
+    private AudioMixerGroup deathAudioGroup;
 
     private Player player;
 
@@ -34,6 +39,10 @@ public class AnimationEventSound : MonoBehaviour
 
         flameSwordAudioSource = gameObject.AddComponent<AudioSource>();
         fsAudioSource.outputAudioMixerGroup = flameSwordAudioGroup;
+
+
+        deathAudioSource = gameObject.AddComponent<AudioSource>();
+        deathAudioSource.outputAudioMixerGroup = deathAudioGroup;
 
         player = GetComponentInParent<Player>();
 
@@ -67,5 +76,11 @@ public class AnimationEventSound : MonoBehaviour
         flameSwordAudioSource.clip = flameSwordSwing[Random.Range(0, 1)];
         flameSwordAudioSource.pitch = Random.Range(0.8f, 1.2f);
         flameSwordAudioSource.Play();
+    }
+
+    public void DeathSounds()
+    {
+        deathAudioSource.clip = death;
+        deathAudioSource.Play();
     }
 }

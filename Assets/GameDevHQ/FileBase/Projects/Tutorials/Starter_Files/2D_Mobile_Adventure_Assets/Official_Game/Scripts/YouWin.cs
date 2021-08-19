@@ -12,7 +12,8 @@ public class YouWin : MonoBehaviour
             if(GameManager.Instance.hasKey == true)
             {
                 GameManager.Instance.youWin = true;
-                UIManager.Instance.YouWinScreen();
+                StartCoroutine(StartOver());
+
             }
             else
             {
@@ -28,5 +29,12 @@ public class YouWin : MonoBehaviour
         {
             needKeyText.SetActive(false);
         }
+    }
+
+    IEnumerator StartOver()
+    {
+        UIManager.Instance.YouWinScreen();
+        yield return new WaitForSeconds(5.0f);
+        GameManager.Instance.gameOver = true;
     }
 }
